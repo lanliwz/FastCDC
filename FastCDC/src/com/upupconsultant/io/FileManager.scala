@@ -6,7 +6,19 @@ import scala.io.BufferedSource
 
 
 object FileManager {
+  def openFileToList(fileName:String):Option[List[String]] = {
+    try {
+      val lines = Control.using(Source.fromFile(fileName)){
+        source => (for (line <- source.getLines()) yield line).toList
+      }
+      Some(lines)
+    }catch {
+      case e:Exception => None
+    }
+    
+  }
   def openAndPrint(fileName:String) ={
+    
     val filenm:Source = {
       try{
       Source.fromFile(fileName)
