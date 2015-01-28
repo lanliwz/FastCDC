@@ -11,7 +11,7 @@ object FileManager {
   def writeToFile(fileName:String) = (lines:List[String])  =>{
     val file = new File(fileName)
     val bout = new BufferedWriter(new FileWriter(file))
-    lines foreach bout.write 
+    lines foreach (line => bout.write(s"$line\n\r"))
     bout.close()
     
   }
