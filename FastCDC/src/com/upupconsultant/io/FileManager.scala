@@ -2,10 +2,20 @@ package com.upupconsultant.io
 import scala.io.Source
 import java.io.{FileNotFoundException, IOException}
 import scala.io.BufferedSource
+import java.io.{PrintWriter,FileWriter,File,BufferedWriter}
 
 
 
 object FileManager {
+  
+  def writeToFile(fileName:String) = (lines:List[String])  =>{
+    val file = new File(fileName)
+    val bout = new BufferedWriter(new FileWriter(file))
+    lines foreach bout.write 
+    bout.close()
+    
+  }
+  
   def openFileToList(fileName:String):Option[List[String]] = {
     try {
       val lines = Control.using(Source.fromFile(fileName)){
