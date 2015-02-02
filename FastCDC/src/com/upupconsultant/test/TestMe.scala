@@ -10,4 +10,5 @@ object TestMe extends App {
   val writeToTestFile = writeToFile("/Users/lanliwz/test.txt")
   val lines = List("a","b","c")
   writeToTestFile(lines)
+  
 }
