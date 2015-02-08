@@ -24,6 +24,7 @@
 			<outputDirectory>/lib</outputDirectory>
 			<excludes>
 			<exclude>${project.groupId}:${project.artifactId}}</exclude>
+			<exclude>scala-library*.jar</exclude>
 			</excludes>
 		</dependencySet>
 	</dependencySets>
