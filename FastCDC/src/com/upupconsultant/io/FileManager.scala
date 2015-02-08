@@ -8,18 +8,18 @@ import java.io.{PrintWriter,FileWriter,File,BufferedWriter}
 
 object FileManager {
   
-  def writeToFile(fileName:String) = (lines:List[String])  =>{
+  def writeToFile(fileName:String) = (lines:Iterable[String])  =>{
     val file = new File(fileName)
     val bout = new BufferedWriter(new FileWriter(file))
-    lines foreach (line => bout.write(s"$line\n\r"))
+    lines foreach (line => bout.write(s"$line\n"))
     bout.close()
     
   }
   
-  def openFileToList(fileName:String):Option[List[String]] = {
+  def openFileToList(fileName:String):Option[Iterable[String]] = {
     try {
       val lines = Control.using(Source.fromFile(fileName)){
-        source => (for (line <- source.getLines()) yield line).toList
+        source => (for (line <- source.getLines()) yield line).toIterable
       }
       Some(lines)
     }catch {
