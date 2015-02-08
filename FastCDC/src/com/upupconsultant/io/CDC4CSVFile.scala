@@ -8,43 +8,57 @@ object CDC4CSVFile {
       val sqllist = for (x <- srclist.get) yield {
         val srccolumn = x.split(',')
         s"$sql values('''$srccolumn(0)''')"
-        
+
       }
-      val sqlfile =FileManager.writeToFile("dest")
+      val sqlfile = FileManager.writeToFile("dest")
       sqlfile(sqllist.toIterable)
     }
   }
-  def sumByKey(src:Iterable[String]):Iterable[String]={
-    val grouped = src.groupBy { x => x.split(',').slice(1, 2)  }
-    val result:Iterable[String] = for (x <- grouped) yield {
+  def sumByKey(src: Iterable[String]): Iterable[String] = {
+    val grouped = src.groupBy { x => x.split(',').slice(1, 2) }
+    val result: Iterable[String] = for (x <- grouped) yield {
       var sum = 0.0f
-      for (y <- x._2){
+      for (y <- x._2) {
         val col1Value = y.split(',')(3).toFloat
         sum += col1Value
       }
-      x._1(0)+','+x._1(1)+','+sum
-      
+      x._1(0) + ',' + x._1(1) + ',' + sum
+
     }
     result
   }
-   def latestByKey(src:Iterable[String]):Iterable[String]={
-    val grouped = src.groupBy { x => x.split(',').slice(1, 2)  }
-    val result:Iterable[String] = for (x <- grouped) yield {
+  def latestByKey(src: Iterable[String]): Iterable[String] = {
+    val grouped = src.groupBy { x => x.split(',').slice(1, 2) }
+    val result: Iterable[String] = for (x <- grouped) yield {
       var maxSeq = 0L
-      var currVal=""
-      for (y <- x._2){
+      var currVal = ""
+      for (y <- x._2) {
         val col1Value = y.split(',')(3).toLong
-        if (maxSeq < col1Value){
+        if (maxSeq < col1Value) {
           maxSeq = col1Value
-          currVal=y
-        }else {
+          currVal = y
+        } else {
           None
         }
       }
       currVal
-      
+
     }
     result
   }
+  def filterByValue(src: Iterable[String],indexes:List[Integer],values:List[String]) ={
+    val result = src.filter(x => {
+      val cols = x.split(',')
+//      indexes for (index <- indexes) 
+      var cond=true
+      for (ind <-indexes) {
+      cond = cols(ind).contains(values(ind)) && cond
+      }
+      cond
+      
+
+    })
+  }
+    
 
 }
