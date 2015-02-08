@@ -6,11 +6,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<filters>
+			<filter>filter/filter-qa.properties</filter>
+		</filters>
 		<resources>
 			<resource>
 				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
+					<exclude>**/*.scala</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -23,6 +27,21 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<executions>
+				<execution>
+				<id>assembly</id>
+				<phase>package</phase>
+				<goals><goal>single</goal></goals>
+				</execution>
+				</executions>
+				<configuration>
+				<descriptor>assembly/dist.xml</descriptor>
+				
+				</configuration>
+			</plugin>			
 		</plugins>
 	</build>
 	<repositories>
@@ -37,11 +56,16 @@
 			<artifactId>slick_2.11</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.typesafe.slick</groupId>
 			<artifactId>slick-extensions_2.11</artifactId>
 			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.milyn</groupId>
+			<artifactId>milyn-smooks-all</artifactId>
+			<version>1.5.1</version>
 		</dependency>
 	</dependencies>
 </project>
