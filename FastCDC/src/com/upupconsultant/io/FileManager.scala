@@ -8,7 +8,7 @@ import java.io.{PrintWriter,FileWriter,File,BufferedWriter}
 
 object FileManager {
   
-  def writeToFile(fileName:String) = (lines:Iterable[String])  =>{
+  def writeToFile(fileName:String) = (lines:List[String])  =>{
     val file = new File(fileName)
     val bout = new BufferedWriter(new FileWriter(file))
     lines foreach (line => bout.write(s"$line\n"))
@@ -16,10 +16,10 @@ object FileManager {
     
   }
   
-  def openFileToList(fileName:String):Option[Iterator[String]] = {
+  def openFileToList(fileName:String):Option[List[String]] = {
     try {
       val lines = Control.using(Source.fromFile(fileName)){
-        source => (source.getLines()) 
+        source => source.getLines().toList
       }
       Some(lines)
     }catch {
@@ -27,6 +27,10 @@ object FileManager {
     }
     
   }
+  def fileToList(fileName:String):List[String] = Control.using(Source.fromFile(fileName))(src => {
+    src.getLines().toList
+  
+  })
   def openAndPrint(fileName:String) ={
     
     val filenm:Source = {

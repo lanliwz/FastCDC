@@ -7,11 +7,11 @@ object CDC4CSVFile {
     if (srclist != None) {
       val sqllist = for (x <- srclist.get) yield {
         val srccolumn = x.split(',')
-        s"$sql values('''$srccolumn(0)''')"
+        s"$sql values('${srccolumn(0)}')"
 
       }
-      val sqlfile = FileManager.writeToFile("dest")
-      sqlfile(sqllist.toIterable)
+      val sqlfile = FileManager.writeToFile(dest)
+      sqlfile(sqllist)
     }
   }
   def sumByKey(src: Iterable[String]): Iterable[String] = {
