@@ -16,10 +16,10 @@ object FileManager {
     
   }
   
-  def openFileToList(fileName:String):Option[Iterable[String]] = {
+  def openFileToList(fileName:String):Option[Iterator[String]] = {
     try {
       val lines = Control.using(Source.fromFile(fileName)){
-        source => (for (line <- source.getLines()) yield line).toIterable
+        source => (source.getLines()) 
       }
       Some(lines)
     }catch {
