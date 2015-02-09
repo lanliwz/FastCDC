@@ -2,12 +2,24 @@ package com.upupconsultant.io
 import com.upupconsultant.io.FileManager
 
 object CDC4CSVFile {
+  
+  def generateSqlTemplate(src: String, dest: String)(f: String => String): Unit = {
+    val srclist = FileManager.openFileToList(src)
+    if (srclist != None) {
+      val sqllist = for (x <- srclist.get) yield {
+        f(x)
+      }
+      val sqlfile = FileManager.writeToFile(dest)
+      sqlfile(sqllist)
+    }
+  }
   def generateSqlFile(src: String, dest: String, sql: String): Unit = {
     val srclist = FileManager.openFileToList(src)
     if (srclist != None) {
       val sqllist = for (x <- srclist.get) yield {
         val srccolumn = x.split(',')
         s"$sql values('${srccolumn(0)}')"
+//        s""+sql
 
       }
       val sqlfile = FileManager.writeToFile(dest)

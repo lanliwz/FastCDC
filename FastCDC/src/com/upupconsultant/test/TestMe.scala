@@ -17,6 +17,10 @@ object TestMe extends App {
 //  writeToTestFile(lines)
 //  openAndPrint("/Users/lanliwz/test2.txt")
   
-  CDC4CSVFile.generateSqlFile("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt", "INSERT INTO TB(A,B)")
+//  CDC4CSVFile.generateSqlFile("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt", "INSERT INTO TB(A,B) VALUES($1,$2)")
+CDC4CSVFile.generateSqlTemplate("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt")(row => {
+  val cols = row.split(',')
+  s"INSERT INTO TB(A,B) VALUES('${cols(1)}','${cols(2)}')"
+  })
   openAndPrint("/Users/lanliwz/sqltest.txt")
 }
