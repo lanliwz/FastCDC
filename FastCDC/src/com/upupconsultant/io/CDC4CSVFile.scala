@@ -1,7 +1,15 @@
 package com.upupconsultant.io
 import com.upupconsultant.io.FileManager
 
+  /** example call
+  CDC4CSVFile.generateSqlTemplate("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt")(row => {
+  val cols = row.split(',')
+  s"INSERT INTO TB(A,B) VALUES('${cols(1)}','${cols(2)}')"
+  })
+  
+  */
 object CDC4CSVFile {
+
   
   def generateSqlTemplate(src: String, dest: String)(f: String => String): Unit = {
     val srclist = FileManager.openFileToList(src)
