@@ -35,14 +35,21 @@ object CDC4CSVFile {
     }
   }
   def sumByKey(src: Iterable[String]): Iterable[String] = {
-    val grouped = src.groupBy { x => x.split(',').slice(1, 2) }
+    val grouped = src.groupBy { x => {
+      val key=x.split(',').slice(0, 2)
+      var b:StringBuilder= new StringBuilder()
+      key.addString(b, ",")
+      b.toString()
+      }
+    }
+    
     val result: Iterable[String] = for (x <- grouped) yield {
       var sum = 0.0f
       for (y <- x._2) {
-        val col1Value = y.split(',')(3).toFloat
+        val col1Value = y.split(',')(2).toFloat
         sum += col1Value
       }
-      x._1(0) + ',' + x._1(1) + ',' + sum
+      x._1 + "," + sum
 
     }
     result

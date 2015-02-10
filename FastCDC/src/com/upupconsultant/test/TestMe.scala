@@ -18,9 +18,13 @@ object TestMe extends App {
 //  openAndPrint("/Users/lanliwz/test2.txt")
   
 //  CDC4CSVFile.generateSqlFile("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt", "INSERT INTO TB(A,B) VALUES($1,$2)")
-CDC4CSVFile.generateSqlTemplate("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt")(row => {
-  val cols = row.split(',')
-  s"INSERT INTO TB(A,B) VALUES('${cols(1)}','${cols(2)}')"
-  })
-  openAndPrint("/Users/lanliwz/sqltest.txt")
+//CDC4CSVFile.generateSqlTemplate("/Users/lanliwz/test1.txt", "/Users/lanliwz/sqltest.txt")(row => {
+//  val cols = row.split(',')
+//  s"INSERT INTO TB(A,B) VALUES('${cols(1)}','${cols(2)}')"
+//  })
+//  openAndPrint("/Users/lanliwz/sqltest.txt")
+  val lines = List("a,b,12","a,b,10","a,c,20","b,d,100","b,d,300","d,d,10","a,c,23")
+  val sorted = CDC4CSVFile.sumByKey(lines)
+  sorted.foreach(x => println(x))
+  
 }
