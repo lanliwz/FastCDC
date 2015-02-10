@@ -54,13 +54,52 @@ object CDC4CSVFile {
     }
     result
   }
+   def sumByKeyTemplate(src: Iterable[String])(key:String =>String)(agg:String => Float): Iterable[String] = {
+    val grouped = src.groupBy { x => key(x)}
+    
+    val result: Iterable[String] = for (x <- grouped) yield {
+      var sum = 0.0f
+      for (y <- x._2) {
+       val colValue =agg(y)
+       sum+=colValue
+      }
+      s"${x._1},$sum"
+
+    }
+    result
+  }
   def latestByKey(src: Iterable[String]): Iterable[String] = {
-    val grouped = src.groupBy { x => x.split(',').slice(1, 2) }
+      val grouped = src.groupBy { x => {
+      val key=x.split(',').slice(0, 2)
+      var b:StringBuilder= new StringBuilder()
+      key.addString(b, ",")
+      b.toString()
+      }
+    }
     val result: Iterable[String] = for (x <- grouped) yield {
       var maxSeq = 0L
       var currVal = ""
       for (y <- x._2) {
-        val col1Value = y.split(',')(3).toLong
+        val col1Value = y.split(',')(2).toLong
+        if (maxSeq < col1Value) {
+          maxSeq = col1Value
+          currVal = y
+        } else {
+          None
+        }
+      }
+      currVal
+
+    }
+    result
+  }
+  def latestByKeyTemplate(src: Iterable[String])(key:String => String)(col:String =>Long): Iterable[String] = {
+    val grouped = src.groupBy { x => key(x) }
+    val result: Iterable[String] = for (x <- grouped) yield {
+      var maxSeq = 0L
+      var currVal = ""
+      for (y <- x._2) {
+        val col1Value = col(y)
         if (maxSeq < col1Value) {
           maxSeq = col1Value
           currVal = y

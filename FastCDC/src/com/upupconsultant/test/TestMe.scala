@@ -24,7 +24,8 @@ object TestMe extends App {
 //  })
 //  openAndPrint("/Users/lanliwz/sqltest.txt")
   val lines = List("a,b,12","a,b,10","a,c,20","b,d,100","b,d,300","d,d,10","a,c,23")
-  val sorted = CDC4CSVFile.sumByKey(lines)
+//  val sorted = CDC4CSVFile.sumByKey(lines)
+  val sorted=CDC4CSVFile.latestByKey(lines)
   sorted.foreach(x => println(x))
   
 }
