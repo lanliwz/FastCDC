@@ -27,7 +27,7 @@ object CDC4CSVFile {
       val sqllist = for (x <- srclist.get) yield {
         val srccolumn = x.split(',')
         s"$sql values('${srccolumn(0)}')"
-//        s""+sql
+
 
       }
       val sqlfile = FileManager.writeToFile(dest)
@@ -49,7 +49,7 @@ object CDC4CSVFile {
         val col1Value = y.split(',')(2).toFloat
         sum += col1Value
       }
-      x._1 + "," + sum
+      s"${x._1},$sum"
 
     }
     result
