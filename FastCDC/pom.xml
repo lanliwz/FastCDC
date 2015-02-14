@@ -31,17 +31,19 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.5.3</version>
 				<executions>
-				<execution>
-				<id>assembly</id>
-				<phase>package</phase>
-				<goals><goal>single</goal></goals>
-				</execution>
+					<execution>
+						<id>assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
 				</executions>
 				<configuration>
-				<descriptor>assembly/dist.xml</descriptor>
-				
+					<descriptor>assembly/dist.xml</descriptor>
+
 				</configuration>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
@@ -66,6 +68,18 @@
 			<groupId>org.milyn</groupId>
 			<artifactId>milyn-smooks-all</artifactId>
 			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		<dependency>
+			<artifactId>oracle</artifactId>
+			<groupId>oracle.jdbc</groupId>
+			<version>1.6</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/ojdbc6.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
