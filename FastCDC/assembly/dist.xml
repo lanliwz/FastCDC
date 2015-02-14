@@ -18,6 +18,11 @@
 			<outputDirectory>/</outputDirectory>
 			<filtered>true</filtered>
 		</file>
+		<file>
+			<source>resources/log4j.properties</source>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+		</file>		
 	</files>
 	<dependencySets>
 		<dependencySet>
