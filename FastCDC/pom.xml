@@ -41,6 +41,19 @@
 				</executions>
 				<configuration>
 					<descriptor>assembly/dist.xml</descriptor>
+					<!-- Configures the created archive -->
+					<archive>
+						<!-- Configures the content of the created manifest -->
+						<manifest>
+							<!-- Adds the classpath to the created manifest -->
+							<addClasspath>true</addClasspath>
+							<!-- Specifies that all dependencies of our application are found 
+								from the lib directory. -->
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- Configures the main class of the application -->
+							<mainClass>com.upupconsultant.test.TestMe</mainClass>
+						</manifest>
+					</archive>
 
 				</configuration>
 			</plugin>
