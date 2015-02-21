@@ -64,6 +64,13 @@
 			<id>com.typesafe.slick</id>
 			<url>http://repo.typesafe.com/typesafe/maven-releases</url>
 		</repository>
+		<!-- 
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+
+		</repository>
+		 -->
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -93,6 +100,32 @@
 			<version>1.6</version>
 			<scope>system</scope>
 			<systemPath>${basedir}/lib/ojdbc6.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-nop</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/logback-classic-1.1.2.jar</systemPath>
+		</dependency>
+				<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>1.1.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/logback-access-1.1.2.jar</systemPath>
+		</dependency>
+				<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/logback-core-1.1.2.jar</systemPath>
 		</dependency>
 	</dependencies>
 </project>
