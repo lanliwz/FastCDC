@@ -2,6 +2,8 @@ package com.upupconsultant.test
 import com.upupconsultant.io.FileManager._
 import com.upupconsultant.io.CDC4CSVFile
 import com.upupconsultant.rdbms.OracleConnector
+import org.slf4j.{Logger,LoggerFactory}
+import java.util.Date
 
 
 object TestMe extends App {
@@ -30,6 +32,8 @@ object TestMe extends App {
 //  val sorted = CDC4CSVFile.sumByKeyTemplate(lines)(key=>{"count"})(aggr => {aggr.split(',')(2).toFloat})
 //  val sorted = CDC4CSVFile.latestByKeyTemplate(lines)(key=>{"last"})(aggr => {aggr.split(',')(2).toLong})
 //  sorted.foreach(x => println(x))
+  val log = LoggerFactory.getLogger(this.getClass)
+  log.debug("test logger {}", new Date())
   OracleConnector.test()
   
 }
