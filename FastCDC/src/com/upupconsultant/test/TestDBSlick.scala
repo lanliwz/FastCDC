@@ -2,6 +2,7 @@ package com.upupconsultant.test
 import com.upupconsultant.test._
 import com.typesafe.slick.driver.oracle.OracleDriver.simple._
 import com.typesafe.slick.driver.oracle.OracleDriver
+import com.upupconsultant.rdbms.OracleConfig._
 
 object TestDBSlick extends App {
 
@@ -11,8 +12,8 @@ object TestDBSlick extends App {
   // the query interface for the Coffees table
   val coffees: TableQuery[Coffees] = TableQuery[Coffees]
   
-  // Create a connection (called a "session") to an in-memory H2 database
-  val db = Database.forURL("jdbc:h2:mem:hello", driver = "org.h2.Driver")
+
+  val db = Database.forURL(url, driver = jdbcDriver)
   db.withSession { implicit session =>
 
     // Create the schema by combining the DDLs for the Suppliers and Coffees
