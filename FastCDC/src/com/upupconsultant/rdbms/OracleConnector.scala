@@ -2,6 +2,7 @@ package com.upupconsultant.rdbms
 import java.sql.{ Connection, DriverManager }
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import oracle.jdbc.driver
+import com.typesafe.slick.driver.oracle.OracleDriver.simple._
 
 object OracleConnector {
   var cpds: ComboPooledDataSource = new ComboPooledDataSource()
@@ -14,6 +15,14 @@ object OracleConnector {
   cpds.setMinPoolSize(1);
   cpds.setAcquireIncrement(1);
   cpds.setMaxPoolSize(2);
+  
+  def testSlick():Unit = {
+    val db:Database = Database.forDataSource(cpds) 
+    db.withSession { 
+      implicit session => ??? 
+      }
+  }
+  
   
   def test():Unit = {
       val connection = cpds.getConnection
