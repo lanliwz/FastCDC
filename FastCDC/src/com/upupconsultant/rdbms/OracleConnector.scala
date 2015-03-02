@@ -3,6 +3,9 @@ import java.sql.{ Connection, DriverManager }
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import oracle.jdbc.driver
 import com.typesafe.slick.driver.oracle.OracleDriver.simple._
+import javax.sql.DataSource
+import scala.slick.jdbc.{GetResult,StaticQuery}
+import scala.slick.jdbc.StaticQuery.interpolation
 
 object OracleConnector {
   var cpds: ComboPooledDataSource = new ComboPooledDataSource()
@@ -17,9 +20,12 @@ object OracleConnector {
   cpds.setMaxPoolSize(2);
   
   def testSlick():Unit = {
-    val db:Database = Database.forDataSource(cpds) 
+    val db:Database = Database.forDataSource(cpds.asInstanceOf[DataSource]) 
+    val query= sql"select table_name from dba_tables".as[(String)]
     db.withSession { 
-      implicit session => ??? 
+      implicit session => 
+        val rst = query.list
+        rst.foreach (x=>println(x))
       }
   }
   
